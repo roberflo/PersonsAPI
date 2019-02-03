@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using PersonsAPI.Models;
+using PersonsAPI.Models.Entity;
 
 namespace PersonsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class PersonsController : ControllerBase
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            Person person = new Person()
+            {
+                Id = 1,
+                FistName = ".Net",
+                LastName = "Developer",
+                Disabled = false
+            };
+            
+            return JsonConvert.SerializeObject(person, Formatting.Indented);
         }
 
         // GET api/values/5
