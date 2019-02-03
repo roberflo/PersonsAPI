@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using PersonsAPI.Models;
 using PersonsAPI.Models.Entity;
+using PersonsAPI.Models.Repositories;
 
 namespace PersonsAPI.Controllers
 {
@@ -13,20 +15,25 @@ namespace PersonsAPI.Controllers
     [ApiController]
     public class PersonsController : ControllerBase
     {
+        private IMemoryCache _cache;
+        private MemoryPersonRepository _personRepository;
+
+        public PersonsController(IMemoryCache memoryCache)
+        {
+            _cache = memoryCache;
+            _personRepository = new MemoryPersonRepository(memoryCache);
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<string> Get()
+        public ActionResult<string> Get(int skip, int take)
         {
-            Person person = new Person()
-            {
-                Id = 1,
-                FistName = ".Net",
-                LastName = "Developer",
-                Disabled = false
-            };
-            
-            return JsonConvert.SerializeObject(person, Formatting.Indented);
+            IList<Person> personList = _personRepository.GetAll(skip, take);
+          return (JsonConvert.SerializeObject(personList, Formatting.Indented));
         }
+
+
+
 
         // GET api/values/5
         [HttpGet("{id}")]

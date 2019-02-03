@@ -25,5 +25,7 @@ namespace PersonsAPI.Models.Entity
             // don't serialize the disabled if false
             return (Disabled);
         }
+
+
     }
 }
