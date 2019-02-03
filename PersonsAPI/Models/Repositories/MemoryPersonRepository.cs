@@ -31,5 +31,19 @@ namespace PersonsAPI.Models.Repositories
             return response;
           
         }
+
+        public Person GetPersonById(int id)
+        {
+            
+            try
+            {
+                return personList.First(person => person.Id == id);
+            }
+            catch (System.InvalidOperationException)
+            {
+                return null;
+            }
+             
+        }
     }
 }
