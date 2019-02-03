@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -37,9 +38,16 @@ namespace PersonsAPI.Controllers
         public ActionResult<string> Get(int id)
         {
             Person person = _personRepository.GetPersonById(id);
-            return (JsonConvert.SerializeObject(person, Formatting.Indented));
+            var jsonResponse = (JsonConvert.SerializeObject(person, Formatting.Indented));
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return jsonResponse;
         }
 
+       
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
