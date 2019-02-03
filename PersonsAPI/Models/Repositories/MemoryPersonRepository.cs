@@ -31,5 +31,10 @@ namespace PersonsAPI.Models.Repositories
             return response;
           
         }
+
+        public Person GetPersonById(int id)
+        {
+            return personList.First(person => person.Id == id);
+        }
     }
 }

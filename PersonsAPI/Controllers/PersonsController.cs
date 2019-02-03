@@ -24,7 +24,7 @@ namespace PersonsAPI.Controllers
             _personRepository = new MemoryPersonRepository(memoryCache);
         }
 
-        // GET api/values
+        // GET persons
         [HttpGet]
         public ActionResult<string> Get(int skip, int take)
         {
@@ -32,14 +32,12 @@ namespace PersonsAPI.Controllers
           return (JsonConvert.SerializeObject(personList, Formatting.Indented));
         }
 
-
-
-
-        // GET api/values/5
+        // GET persons/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            Person person = _personRepository.GetPersonById(id);
+            return (JsonConvert.SerializeObject(person, Formatting.Indented));
         }
 
         // POST api/values
