@@ -30,7 +30,9 @@ namespace PersonsAPI.Models.Services
                 return persons;
             }
 
+            //Future bd query to fill cache
             _cache.Set(_cacheKey, fillPersons());
+
             if (_cache.TryGetValue(_cacheKey, out IList<Person> personsCached))
             {
                 return personsCached;
