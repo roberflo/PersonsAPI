@@ -1,4 +1,5 @@
-# Introduction: PersonsAPI (Proof of concept for IMemory cache)
+# Introduction: PersonsAPI 
+# (Proof of concept for IMemory cache)
  
 
 Demo of an API with commonly used behaviors like pagination and memory cache.
@@ -22,4 +23,4 @@ The arquitecture solution is to cut the dependencies on microservices with singl
 
 Documentation: https://localhost:port/swagger
 
-
+![alt text](https://github.com/roberflo/PersonsAPI/blob/master/PersonApiBasicDoc.PNG)
