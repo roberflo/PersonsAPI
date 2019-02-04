@@ -97,8 +97,21 @@ namespace PersonsAPI.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                var matchPerson = _personRepository.GetPersonById(id);
+                if (matchPerson == null) return NotFound($"Couldn't find a person of id: {id}");
+                _personRepository.DeletePerson(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                StatusCode(StatusCodes.Status500InternalServerError);
+                throw e;
+            }
+           
         }
     }
 }
