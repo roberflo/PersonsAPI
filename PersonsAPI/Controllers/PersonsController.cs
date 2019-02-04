@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
@@ -76,8 +77,22 @@ namespace PersonsAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] Person person)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
+            {
+               var matchPerson = _personRepository.GetPersonById(id);
+                if (matchPerson == null) return NotFound($"Couldn't find a person of id: {id}");
+                _personRepository.UpdatePerson(id, person);
+                return NoContent();
+            }
+            catch (Exception e)
+            {       
+                StatusCode(StatusCodes.Status500InternalServerError);
+                throw e;
+            }
+            
         }
 
         // DELETE api/values/5

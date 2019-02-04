@@ -45,7 +45,7 @@ namespace PersonsAPI.Models.Services
            
            var persons = new List<Person>();
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
                 var basePerson = new Person()
                 {
