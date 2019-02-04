@@ -1,6 +1,4 @@
-# Introduction: PersonsAPI 
-# (Proof of concept for IMemory cache)
- 
+# Introduction: Proof of concept for IMemory cache 
 
 Demo of an API with commonly used behaviors like pagination and memory cache.
 
