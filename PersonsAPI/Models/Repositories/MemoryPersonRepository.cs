@@ -83,5 +83,22 @@ namespace PersonsAPI.Models.Repositories
                 throw e;
             }
         }
+
+        public void DeletePerson(int id)
+        {
+            try
+            {
+
+                Person matchPerson = personList.FirstOrDefault(p => p.Id == id);
+                personList.Remove(matchPerson);
+
+                cacheService.UpdatePersonsCache(personList);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
     }
 }
