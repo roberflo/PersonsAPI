@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using PersonsAPI.Models.Entity;
+using PersonsAPI.Models.Repositories.Interfaces;
 using PersonsAPI.Models.Services;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PersonsAPI.Models.Repositories
 {
-    public class MemoryPersonRepository 
+    public class MemoryPersonRepository : IPersonRepository
     {
         public IList<Person> personList { get; set; }
         public PersonCacheService cacheService { get; set; }

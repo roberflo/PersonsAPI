@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using PersonsAPI.Models;
 using PersonsAPI.Models.Entity;
 using PersonsAPI.Models.Repositories;
+using PersonsAPI.Models.Repositories.Interfaces;
 
 namespace PersonsAPI.Controllers
 {
@@ -18,12 +19,14 @@ namespace PersonsAPI.Controllers
     public class PersonsController : ControllerBase
     {
         private IMemoryCache _cache;
-        private MemoryPersonRepository _personRepository;
+        private IPersonRepository _personRepository;
 
         public PersonsController(IMemoryCache memoryCache)
         {
-            _cache = memoryCache;
+
+            //Future dependency inyection with autofac to bd, file or other
             _personRepository = new MemoryPersonRepository(memoryCache);
+            _cache = memoryCache;
         }
 
         // GET persons

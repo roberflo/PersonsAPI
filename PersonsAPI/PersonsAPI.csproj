@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Repositories\Interfaces\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
