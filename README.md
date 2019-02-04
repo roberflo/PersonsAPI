@@ -17,7 +17,7 @@ add fields like payment status (ActiveBill, LatePayment,etc)
 
 The arquitecture solution is to cut the dependencies on microservices with single responsability meaner and all the shared data that is base of a person must be on a single microservice.
 
-# Persons API
+# Persons API .NetCore 2.1
 
 Documentation: https://localhost:port/swagger
 
