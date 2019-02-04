@@ -64,5 +64,24 @@ namespace PersonsAPI.Models.Repositories
             return person;
             
         }
+
+        public void UpdatePerson(int id, Person person)
+        {
+            try
+            {
+
+                var matchPerson = personList.FirstOrDefault(p => p.Id == id);
+                matchPerson.FistName = person.FistName;
+                matchPerson.LastName = person.LastName;
+                matchPerson.Disabled = person.Disabled;
+
+                cacheService.UpdatePersonsCache(personList);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
     }
 }
