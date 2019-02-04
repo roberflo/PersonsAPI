@@ -45,7 +45,7 @@ namespace PersonsAPI.Models.Services
            
            var persons = new List<Person>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 6; i++)
             {
                 var basePerson = new Person()
                 {
@@ -58,6 +58,12 @@ namespace PersonsAPI.Models.Services
                 persons.Add(basePerson);
             }
             return persons;
+        }
+
+        public void UpdatePersonsCache(IList<Person> personsList)
+        {
+            _cache.Set(_cacheKey, personsList);
+
         }
     }
 }
