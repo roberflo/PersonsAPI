@@ -11,10 +11,11 @@ namespace PersonsAPI.Models.Repositories
     public class MemoryPersonRepository 
     {
         public IList<Person> personList { get; set; }
+        public PersonCacheService cacheService { get; set; }
         public MemoryPersonRepository(IMemoryCache cache)
         {
-
-            personList = new PersonCacheService(cache).GetPersons();
+            cacheService = new PersonCacheService(cache);
+            personList = cacheService.GetPersons();
         }
 
         public IList<Person> GetAll(int skip, int take)
@@ -44,6 +45,24 @@ namespace PersonsAPI.Models.Repositories
                 return null;
             }
              
+        }
+
+        public Person CreatePerson(Person person)
+        {
+            try
+            {
+                //Reasign id
+                person.Id = personList.Count;
+                personList.Add(person);
+                cacheService.UpdatePersonsCache(personList);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            return person;
+            
         }
     }
 }

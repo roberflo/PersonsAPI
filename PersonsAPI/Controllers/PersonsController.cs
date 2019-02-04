@@ -47,11 +47,31 @@ namespace PersonsAPI.Controllers
             return jsonResponse;
         }
 
-       
+
         // POST api/values
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Person person)
         {
+            try
+            {
+               
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object");
+                }
+
+              var newPerson = _personRepository.CreatePerson(person);
+
+                return new CreatedResult(
+                    new Uri("/api/Person", UriKind.Relative), person);
+            }
+            catch (Exception )
+            {
+               
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // PUT api/values/5
