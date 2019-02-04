@@ -52,7 +52,7 @@ namespace PersonsAPI.Models.Repositories
             try
             {
                 //Reasign id
-                person.Id = personList.Count + 1;
+                person.Id = personList.Count;
                 personList.Add(person);
                 cacheService.UpdatePersonsCache(personList);
             }
